@@ -88,4 +88,4 @@ $ docker rmi httpd:2.2.29
 
 Untagged: httpd:2.2.29
 Deleted: sha256:ccb5efae65225eb3fb2b47e8d947e4c54726f6b4e4
-``
+```
