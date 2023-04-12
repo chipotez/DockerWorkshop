@@ -1,5 +1,64 @@
 # DockerWorkshop
 
+## Instalación de Docker en RHEL 8
+
+Docker es una plataforma de software que permite crear, probar y desplegar aplicaciones en contenedores. A continuación, se detallan los pasos para instalar Docker en RHEL 8:
+
+Requisitos previos
+
+Antes de instalar Docker en RHEL 8, asegúrate de tener lo siguiente:
+
+- Acceso de administrador al sistema
+- Suscripción a Red Hat Enterprise Linux 8
+- Acceso a Internet
+
+1. Actualiza el sistema
+
+Antes de instalar Docker, actualiza el sistema con los últimos paquetes disponibles. Para ello, ejecuta el siguiente comando:
+
+`sudo dnf update`
+
+2. Agrega el repositorio de Docker
+
+Docker no está disponible en los repositorios oficiales de RHEL 8, por lo que deberás agregar el repositorio de Docker para poder instalarlo. Para ello, sigue estos pasos:
+
+Descarga e instala el paquete que agrega el repositorio de Docker:
+
+`sudo dnf install -y dnf-plugins-core`
+
+Agrega el repositorio de Docker:
+
+`sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo`
+
+3. Instala Docker
+
+Una vez que hayas agregado el repositorio de Docker, puedes instalar Docker Community Edition (CE) utilizando el siguiente comando:
+
+`sudo dnf install -y docker-ce docker-ce-cli containerd.io`
+
+Este comando instala la última versión de Docker CE, así como Docker CLI (la interfaz de línea de comandos de Docker) y containerd.io (el daemon de contenedores).
+
+4. Inicia el servicio de Docker
+
+Para iniciar el servicio de Docker, ejecuta el siguiente comando:
+
+`sudo systemctl start docker`
+
+5. Verifica la instalación de Docker
+
+Para verificar que Docker se ha instalado correctamente, ejecuta el siguiente comando:
+
+`sudo docker run hello-world`
+
+Este comando descarga una imagen de prueba y la ejecuta en un contenedor. Si Docker está instalado correctamente, verás un mensaje de saludo de Docker.
+
+¡Y eso es todo! Ahora tienes Docker instalado en tu sistema RHEL 8.
+
+
+
+
+
+
 Trabajando con imágenes usando la interfaz de línea de comandos (CLI) de Docker
 A continuación, se detallan los pasos para trabajar con imágenes utilizando la interfaz de línea de comandos (CLI) de Docker:
 
