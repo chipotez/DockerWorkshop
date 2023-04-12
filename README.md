@@ -14,17 +14,17 @@ Antes de instalar Docker en RHEL 8, asegúrate de tener lo siguiente:
 
 1. Actualiza el sistema
 
-Antes de instalar Docker, actualiza el sistema con los últimos paquetes disponibles. Para ello, ejecuta el siguiente comando:
+  Antes de instalar Docker, actualiza el sistema con los últimos paquetes disponibles. Para ello, ejecuta el siguiente comando:
 
-`sudo dnf update`
+  `sudo dnf update`
 
 2. Agrega el repositorio de Docker
 
-Docker no está disponible en los repositorios oficiales de RHEL 8, por lo que deberás agregar el repositorio de Docker para poder instalarlo. Para ello, sigue estos pasos:
+  Docker no está disponible en los repositorios oficiales de RHEL 8, por lo que deberás agregar el repositorio de Docker para poder instalarlo. Para ello, sigue estos pasos:
 
-Descarga e instala el paquete que agrega el repositorio de Docker:
+  Descarga e instala el paquete que agrega el repositorio de Docker:
 
-`sudo dnf install -y dnf-plugins-core`
+  `sudo dnf install -y dnf-plugins-core`
 
 Agrega el repositorio de Docker:
 
