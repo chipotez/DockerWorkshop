@@ -607,3 +607,64 @@ HOME_URL="https://www.debian.org/"
 SUPPORT_URL="https://www.debian.org/support"
 BUG_REPORT_URL="https://bugs.debian.org/"
 ```
+### docker start & docker stop
+
+Los comandos "docker start" y "docker stop" se utilizan en Docker para iniciar y detener contenedores Docker, respectivamente. A continuación se presentan algunas situaciones en las que es necesario utilizar estos comandos:
+
+Iniciar un contenedor: Después de crear un contenedor Docker utilizando el comando "docker run", es necesario usar el comando "docker start" para iniciar el contenedor. Esto asegura que el contenedor se inicie y se ejecute correctamente para que pueda utilizarse para alojar aplicaciones o servicios.
+
+Detener un contenedor: Cuando se necesita realizar tareas de mantenimiento o actualización en el sistema host o en el contenedor mismo, es necesario detener el contenedor utilizando el comando "docker stop". Esto asegura que cualquier proceso en ejecución dentro del contenedor se detenga de manera segura antes de detener el contenedor.
+
+Cambiar la configuración de un contenedor: Si se necesitan cambiar la configuración de un contenedor, como la configuración de la red o los volúmenes, es necesario detener el contenedor utilizando el comando "docker stop", realizar los cambios necesarios y, a continuación, iniciar el contenedor nuevamente utilizando el comando "docker start".
+
+Liberar recursos del sistema: Si se ejecutan varios contenedores Docker en un sistema y se necesita liberar recursos del sistema, es necesario detener los contenedores que no se están utilizando utilizando el comando "docker stop".
+
+```
+[root@docker01 docker]# docker ps
+CONTAINER ID   IMAGE     COMMAND              CREATED          STATUS          PORTS     NAMES
+fb69b457eb91   httpd     "httpd-foreground"   21 minutes ago   Up 21 minutes   80/tcp    stupefied_sinoussi
+```
+```
+[root@docker01 docker]# docker stop fb69b457eb91
+fb69b457eb91
+```
+```
+[root@docker01 docker]# docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+```
+```
+[root@docker01 docker]# docker start fb69b457eb91
+fb69b457eb91
+```
+```
+[root@docker01 docker]# docker ps
+CONTAINER ID   IMAGE     COMMAND              CREATED          STATUS         PORTS     NAMES
+fb69b457eb91   httpd     "httpd-foreground"   22 minutes ago   Up 2 seconds   80/tcp    stupefied_sinoussi
+```
+### docker --publish
+El port mapping o mapeo de puertos en Docker es una técnica que se utiliza para exponer los puertos de un contenedor Docker al host o al mundo exterior. Esto permite que la aplicación o el servicio que se ejecuta dentro del contenedor Docker esté disponible para su uso en otros dispositivos o redes externas.
+
+El mapeo de puertos se puede realizar utilizando la opción "-p" o "--publish" del comando "docker run". Esta opción permite especificar el puerto del host y el puerto del contenedor que se deben mapear. Por ejemplo, si se desea mapear el puerto 80 del host al puerto 8080 del contenedor, se puede utilizar el siguiente comando:
+```
+[root@docker01 docker]# docker ps
+CONTAINER ID   IMAGE     COMMAND              CREATED          STATUS         PORTS     NAMES
+fb69b457eb91   httpd     "httpd-foreground"   26 minutes ago   Up 4 minutes   80/tcp    stupefied_sinoussi
+```
+```
+[root@docker01 docker]# curl localhost:8080
+curl: (7) Failed to connect to localhost port 8080: Connection refused
+```
+```
+[root@docker01 docker]# docker run -d -p 8080:80 httpd
+eb0b95cda538c0799a58721141522fc372263668ec92440452336c41a04a7e49
+```
+```
+[root@docker01 docker]# docker ps
+CONTAINER ID   IMAGE     COMMAND              CREATED          STATUS         PORTS                                   NAMES
+eb0b95cda538   httpd     "httpd-foreground"   5 seconds ago    Up 4 seconds   0.0.0.0:8080->80/tcp, :::8080->80/tcp   amazing_rosalind
+fb69b457eb91   httpd     "httpd-foreground"   26 minutes ago   Up 4 minutes   80/tcp                                  stupefied_sinoussi
+```
+```
+[root@docker01 docker]# curl localhost:8080
+<html><body><h1>It works!</h1></body></html>
+```
