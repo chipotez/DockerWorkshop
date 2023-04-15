@@ -914,6 +914,12 @@ Status: Downloaded newer image for wordpress:latest
 ![WordPress](WordPress.png)
 
 ```
+[root@docker01 docker]# docker inspect wordpress | grep -i IPAddress
+            "SecondaryIPAddresses": null,
+            "IPAddress": "172.17.0.3",
+                    "IPAddress": "172.17.0.3",
+```
+```
 [root@docker01 docker]# docker exec -it wordpress env|grep -i mysql
 MYSQL_PORT=tcp://172.17.0.2:3306
 MYSQL_PORT_3306_TCP=tcp://172.17.0.2:3306
