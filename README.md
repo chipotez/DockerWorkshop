@@ -398,7 +398,7 @@ $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 httpd               latest              85f2c5846f52        2 weeks ago         138MB
 httpd               2.2.29              ccb5efae6522        2 years ago         201MB
-...
+```
 
 Salida del comando
 
@@ -440,15 +440,25 @@ Para guardar una imagen de Docker, se utiliza el comando docker save seguido del
 ```
 [root@docker01 ~]# mkdir /mnt/docker ; cd /mnt/docker
 
+---------  
+
 [root@docker01 docker]# pwd
 /mnt/docker
 
+---------  
+
 [root@docker01 docker]# ls
+
+---------  
 
 [root@docker01 docker]# docker save httpd -o httpd.tar
 
+---------  
+
 [root@docker01 docker]# ls
 httpd.tar
+
+---------  
 
 [root@docker01 docker]# docker rmi httpd
 Untagged: httpd:latest
@@ -460,8 +470,12 @@ Deleted: sha256:2698f8a274d166849ccc9e50434b996a8a392150b6ed0664c9d936e27c2aa3dc
 Deleted: sha256:f5d462e0018cd9b8cd5b292a6046428dec593e0cd4b7856dd2d0968e4fc7538f
 Deleted: sha256:ed7b0ef3bf5bbec74379c3ae3d5339e666a314223e863c70644f7522a7527461
 
+---------  
+
 [root@docker01 docker]# docker images
 REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+
+---------  
 
 [root@docker01 docker]# docker load -i httpd.tar 
 ed7b0ef3bf5b: Loading layer [==================================================>]  84.02MB/84.02MB
@@ -470,6 +484,8 @@ ed7b0ef3bf5b: Loading layer [==================================================>
 e7bd853ca2e7: Loading layer [==================================================>]  60.45MB/60.45MB
 355053d0995e: Loading layer [==================================================>]  3.584kB/3.584kB
 Loaded image: httpd:latest
+
+---------  
 
 [root@docker01 docker]# docker images
 REPOSITORY   TAG       IMAGE ID       CREATED      SIZE
