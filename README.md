@@ -779,6 +779,39 @@ fb69b457eb91   httpd     "httpd-foreground"   About an hour ago   Up 46 minutes 
                 "Config": {}
             },
 ```
+### Manejando variables
 
+El manejo de variables en Docker es importante porque permite personalizar y configurar los contenedores de manera más flexible y escalable. Las variables se utilizan para configurar los contenedores en tiempo de ejecución y para proporcionar información específica, como credenciales de autenticación, URLs de API, claves de API, tokens de autenticación, nombres de host, rutas de directorios y más.
+
+Las variables se pueden utilizar para configurar la aplicación dentro de un contenedor o para establecer la configuración del contenedor en sí. Por ejemplo, las variables de entorno se pueden utilizar para definir configuraciones personalizadas en el contenedor, como la configuración de Apache o la configuración de MySQL.
+
+Una de las ventajas de utilizar variables en Docker es que permiten crear imágenes de contenedores que sean más portátiles y fáciles de configurar. Al utilizar variables de entorno, se pueden crear imágenes de contenedores genéricas que se pueden utilizar en diferentes entornos sin tener que reconfigurar la imagen para cada entorno.
+```
+[root@docker01 docker]# docker ps -a
+CONTAINER ID   IMAGE     COMMAND              CREATED             STATUS                         PORTS                                   NAMES
+5ebb5649340e   httpd     "httpd-foreground"   20 minutes ago      Up 20 minutes                  0.0.0.0:8083->80/tcp, :::8083->80/tcp   serene_shtern
+feb841f6a2a6   httpd     "httpd-foreground"   21 minutes ago      Up 21 minutes                  0.0.0.0:8082->80/tcp, :::8082->80/tcp   inspiring_wozniak
+c9388a45d655   httpd     "httpd-foreground"   43 minutes ago      Up 23 minutes                  0.0.0.0:8081->80/tcp, :::8081->80/tcp   cranky_elion
+eb0b95cda538   httpd     "httpd-foreground"   46 minutes ago      Up 46 minutes                  0.0.0.0:8080->80/tcp, :::8080->80/tcp   amazing_rosalind
+fb69b457eb91   httpd     "httpd-foreground"   About an hour ago   Up 51 minutes                  80/tcp                                  stupefied_sinoussi
+485d7f760b45   httpd     "httpd-foreground"   About an hour ago   Exited (0) About an hour ago                                           zealous_joliot
+10d77bcb565e   httpd     "httpd-foreground"   About an hour ago   Exited (0) About an hour ago                                           zen_goodall
+```
+```
+[root@docker01 docker]# docker rm -f $(docker ps -qa)
+5ebb5649340e
+feb841f6a2a6
+c9388a45d655
+eb0b95cda538
+fb69b457eb91
+485d7f760b45
+10d77bcb565e
+```
+```
+[root@docker01 docker]# 
+[root@docker01 docker]# 
+[root@docker01 docker]# docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+```
 
 
