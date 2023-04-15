@@ -483,3 +483,57 @@ Loaded image: httpd:latest
 REPOSITORY   TAG       IMAGE ID       CREATED      SIZE
 httpd        latest    4b7fc736cb48   3 days ago   145MB
 ```
+## Manejando contenedores
+
+### docker ps
+
+El comando "docker ps" es utilizado en Docker para mostrar una lista de los contenedores de Docker que están actualmente en ejecución en el sistema. El proceso que realiza este comando se puede describir en los siguientes pasos:
+
+1. Docker busca el demonio de Docker en ejecución en el sistema.
+
+2. El comando "docker ps" se comunica con el demonio de Docker para obtener una lista de los contenedores en ejecución.
+
+3. El demonio de Docker devuelve al comando una lista de los contenedores en ejecución, que incluye información como el ID del contenedor, el nombre del contenedor, la imagen utilizada para crear el contenedor, el estado actual del contenedor y otros detalles relevantes.
+
+4. El comando "docker ps" presenta esta información en una tabla legible para el usuario, que muestra los detalles relevantes de cada contenedor en una línea separada.
+
+```
+[root@docker01 docker]# docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+```
+```
+[root@docker01 docker]# docker run httpd 
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 172.17.0.2. Set the 'ServerName' directive globally to suppress this message
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 172.17.0.2. Set the 'ServerName' directive globally to suppress this message
+[Sat Apr 15 16:23:17.427825 2023] [mpm_event:notice] [pid 1:tid 139886229470528] AH00489: Apache/2.4.57 (Unix) configured -- resuming normal operations
+[Sat Apr 15 16:23:17.428064 2023] [core:notice] [pid 1:tid 139886229470528] AH00094: Command line: 'httpd -D FOREGROUND'
+```
+### docker logs
+El comando "docker logs ID" se utiliza en Docker para mostrar los registros o registros de un contenedor Docker específico. El proceso que realiza este comando se puede describir en los siguientes pasos:
+
+1. Docker busca el demonio de Docker en ejecución en el sistema.
+
+2. El comando "docker logs" se comunica con el demonio de Docker para buscar los registros del contenedor Docker específico que se especifica mediante su ID.
+
+3. El demonio de Docker busca los registros del contenedor Docker especificado y los devuelve al comando "docker logs".
+
+4. El comando "docker logs" presenta los registros del contenedor Docker especificado en la salida estándar del sistema.
+
+```
+[root@docker01 docker]# docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+```
+```
+[root@docker01 docker]# docker ps -a
+CONTAINER ID   IMAGE     COMMAND              CREATED         STATUS                      PORTS     NAMES
+485d7f760b45   httpd     "httpd-foreground"   3 minutes ago   Exited (0) 20 seconds ago             zealous_joliot
+10d77bcb565e   httpd     "httpd-foreground"   3 minutes ago   Exited (0) 3 minutes ago              zen_goodall
+```
+```
+[root@docker01 docker]# docker logs 10d77bcb565e
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 172.17.0.2. Set the 'ServerName' directive globally to suppress this message
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 172.17.0.2. Set the 'ServerName' directive globally to suppress this message
+[Sat Apr 15 16:23:03.614604 2023] [mpm_event:notice] [pid 1:tid 140485278223680] AH00489: Apache/2.4.57 (Unix) configured -- resuming normal operations
+[Sat Apr 15 16:23:03.614760 2023] [core:notice] [pid 1:tid 140485278223680] AH00094: Command line: 'httpd -D FOREGROUND'
+[Sat Apr 15 16:23:11.415243 2023] [mpm_event:notice] [pid 1:tid 140485278223680] AH00491: caught SIGTERM, shutting down
+```
