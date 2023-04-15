@@ -1,4 +1,18 @@
-# DockerWorkshop
+# Docker Workshop
+
+## Introducción
+
+Bienvenidos al taller de contenedores con Docker. En este taller, vamos a explorar cómo Docker puede ser utilizado tanto desde la perspectiva de un administrador de infraestructura como de un desarrollador de aplicaciones. 
+
+Docker es una plataforma de contenedores de código abierto que es popular en el mundo de la tecnología por su capacidad para simplificar el desarrollo de aplicaciones y la gestión de infraestructura.
+
+Enfoque de infraestructura:
+
+Para un administrador de infraestructura, Docker es una herramienta para la gestión de contenedores y la implementación de aplicaciones. Docker permite a los administradores de infraestructura desplegar aplicaciones de manera rápida y eficiente sobre infraestructuras on-premise y en nube pública, privada o híbrida, lo que ahorra tiempo y recursos. Además, Docker ofrece una gestión de contenedores simplificada, lo que permite a los administradores de infraestructura escalar aplicaciones y servicios con facilidad.
+
+Enfoque de desarrollador de aplicaciones:
+
+Desde la perspectiva de un desarrollador de aplicaciones, Docker es una herramienta para la creación de aplicaciones y servicios. Docker proporciona un ambiente consistente de desarrollo, lo que significa que los desarrolladores pueden trabajar en aplicaciones sin tener que preocuparse por las diferencias en los entornos de desarrollo.
 
 ## Instalación de Docker en RHEL 8
 
@@ -319,10 +333,10 @@ De esta forma, puede ejecutar el comando docker como usuario no root o actual. E
 
 ¡Y eso es todo! Ahora tienes Docker instalado en tu sistema RHEL 8.
 
-## Trabajando con imágenes usando la interfaz de línea de comandos (CLI) de Docker
+## Trabajando con Docker (CLI)
 A continuación, se detallan los pasos para trabajar con imágenes utilizando la interfaz de línea de comandos (CLI) de Docker:
 
-## Buscando imágenes en Docker Hub
+### Buscando imágenes en Docker Hub
 Para buscar una imagen de Docker en el repositorio de Docker Hub, sigue estos pasos:
 
 Visita https://hub.docker.com/ para buscar imágenes disponibles.
@@ -347,7 +361,7 @@ Salida del comando
 
 El comando lista todas las imágenes disponibles en Docker Hub que contienen la palabra clave "httpd". Para cada imagen, muestra su nombre, descripción, número de estrellas y si es oficial o automatizada.
 
-## Descargando imágenes desde Docker Hub
+### Descargando imágenes desde Docker Hub
 
 Una vez que hayas encontrado la imagen que deseas, descárgala utilizando el siguiente comando:
 ```
@@ -386,7 +400,7 @@ Salida del comando
 
 El comando descarga la imagen httpd desde Docker Hub y muestra información sobre el proceso de descarga. En el ejemplo anterior, se descargó la versión "latest" de la imagen.
 
-## Listando imágenes en tu sistema
+### Listando imágenes en tu sistema
 
 Para verificar las imágenes descargadas en tu sistema, ejecuta el siguiente comando:
 
@@ -404,7 +418,7 @@ Salida del comando
 
 El comando lista todas las imágenes descargadas en tu sistema. Para cada imagen, muestra su nombre, tag, identificador de imagen, fecha de creación y tamaño.
 
-## Eliminando imágenes de tu sistema
+### Eliminando imágenes
 
 Si deseas eliminar una imagen de tu sistema, utiliza el siguiente comando:
 
@@ -431,7 +445,7 @@ Deleted: sha256:c69ae1aa46985cbaf186b6354c61a1d2e0d6af47133db47bf04f0c6eb9c858e9
 
 Lista nuevamente tus imagenes y observa la salida.
 
-## "Saving and Loading" imágenes de Docker
+### "Saving and Loading" imágenes de Docker
 
 Es útil cuando se desea compartir una imagen de Docker con otros usuarios o trasladarla a otra máquina.
 
@@ -483,8 +497,6 @@ Loaded image: httpd:latest
 REPOSITORY   TAG       IMAGE ID       CREATED      SIZE
 httpd        latest    4b7fc736cb48   3 days ago   145MB
 ```
-## Manejando contenedores
-
 ### docker ps
 
 El comando "docker ps" es utilizado en Docker para mostrar una lista de los contenedores de Docker que están actualmente en ejecución en el sistema. El proceso que realiza este comando se puede describir en los siguientes pasos:
