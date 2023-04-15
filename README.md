@@ -1,6 +1,4 @@
-# Docker Workshop
-
-## Introducción
+# Introducción
 
 Bienvenidos al taller de contenedores con Docker. En este taller, vamos a explorar cómo Docker puede ser utilizado tanto desde la perspectiva de un administrador de infraestructura como de un desarrollador de aplicaciones. 
 
