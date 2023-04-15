@@ -390,8 +390,6 @@ El comando descarga la imagen httpd desde Docker Hub y muestra información sobr
 
 Para verificar las imágenes descargadas en tu sistema, ejecuta el siguiente comando:
 
-`docker images`
-
 Ejemplo de ejecución
 
 ```
@@ -401,7 +399,6 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 httpd               latest              85f2c5846f52        2 weeks ago         138MB
 httpd               2.2.29              ccb5efae6522        2 years ago         201MB
 ...
-```
 
 Salida del comando
 
@@ -411,13 +408,69 @@ El comando lista todas las imágenes descargadas en tu sistema. Para cada imagen
 
 Si deseas eliminar una imagen de tu sistema, utiliza el siguiente comando:
 
-`docker rmi httpd:2.2.29`
-
-Ejemplo de ejecución
-
 ```
-$ docker rmi httpd:2.2.29
-
+[root@docker01 ~]# docker rmi httpd:2.2.29
 Untagged: httpd:2.2.29
-Deleted: sha256:ccb5efae65225eb3fb2b47e8d947e4c54726f6b4e4
+Untagged: httpd@sha256:0a39699d267aaee04382c6b1b4fe2fc30737450fe8d4fabd88eee1a3e0016144
+Deleted: sha256:78ef8a7db81acde885e627ceafbc7f2d76a052b44d679b9c274a18bce85d5ccc
+Deleted: sha256:5d5325c9e14025425b154bcd4b4c4092fddc0cf28095dec4fda01da336a03aa6
+Deleted: sha256:c04125bb67950cffe237d960070d48c9b29a00b27fcb12513406ecf0ab80d32d
+Deleted: sha256:5f9dca6732ab55daa3c354a6de5c0e651a7032ad3700a8c5f5f2b4daefb3b8ef
+Deleted: sha256:7a9b5807179ca1a30644ad5f8d0ff89c9970f6e30ed8957e7758321eff7036e4
+Deleted: sha256:55efd6082c88416ed5089a9f9347d3493264931c11934299da4a0d0fe4aa22fb
+Deleted: sha256:41324ac66556b527c8824ad9144cd2639e9753e4e387efde49fd2838082864ca
+Deleted: sha256:c2b6854195202c32627a0918233531678a7f53ba89cb10c8ede6acc9c5139ab3
+Deleted: sha256:5f7c1bd0a29de2d99977a1476cdc8eb357080a4831e91342738a2587e54bd095
+Deleted: sha256:386ab9d75eab80ae1eedf219c639be1f398997e1b0773ccb05d4d0bbb7ca86d2
+Deleted: sha256:080cf2d8b7f3c25eea37c4393b6696f30eb0411290ebaedc6dda57f17b375ec2
+Deleted: sha256:64f09aa49f80203adc402b131fc8736961031f2b4478b1c5245bcaec404fd354
+Deleted: sha256:a5dd5b712a2ae1a4868cedf54e44b8a63c8fd35c9a75edf74d64c099a9278331
+Deleted: sha256:e10e5ea91f007db418b284f4adc5f0b98f374d79ae52b9687b0d6d33865ffbcf
+Deleted: sha256:c69ae1aa46985cbaf186b6354c61a1d2e0d6af47133db47bf04f0c6eb9c858e9
 ```
+
+Lista nuevamente tus imagenes y observa la salida.
+
+## "Saving and Loading" imágenes de Docker
+
+Es útil cuando se desea compartir una imagen de Docker con otros usuarios o trasladarla a otra máquina.
+
+Para guardar una imagen de Docker, se utiliza el comando docker save seguido del nombre de la imagen y la ruta del archivo de destino donde se guardará la imagen.
+
+```
+[root@docker01 ~]# mkdir /mnt/docker ; cd /mnt/docker
+
+[root@docker01 docker]# pwd
+/mnt/docker
+
+[root@docker01 docker]# ls
+
+[root@docker01 docker]# docker save httpd -o httpd.tar
+
+[root@docker01 docker]# ls
+httpd.tar
+
+[root@docker01 docker]# docker rmi httpd
+Untagged: httpd:latest
+Untagged: httpd@sha256:a182ef2350699f04b8f8e736747104eb273e255e818cd55b6d7aa50a1490ed0c
+Deleted: sha256:4b7fc736cb48352ef2c989d63c74bed704fc5a0cd43eb5c7c7cf9ab7faf891d1
+Deleted: sha256:24554be0fd03955c321886841f2a677f8057fa8cf93e0493a9cdc5a5eae54e71
+Deleted: sha256:1c0d3c454ba728985456b066e59d4cfa163a06caa8471672f9e040706cbc2f82
+Deleted: sha256:2698f8a274d166849ccc9e50434b996a8a392150b6ed0664c9d936e27c2aa3dc
+Deleted: sha256:f5d462e0018cd9b8cd5b292a6046428dec593e0cd4b7856dd2d0968e4fc7538f
+Deleted: sha256:ed7b0ef3bf5bbec74379c3ae3d5339e666a314223e863c70644f7522a7527461
+
+[root@docker01 docker]# docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+
+[root@docker01 docker]# docker load -i httpd.tar 
+ed7b0ef3bf5b: Loading layer [==================================================>]  84.02MB/84.02MB
+568467bc0db5: Loading layer [==================================================>]  3.072kB/3.072kB
+16f81c3ee33a: Loading layer [==================================================>]  5.104MB/5.104MB
+e7bd853ca2e7: Loading layer [==================================================>]  60.45MB/60.45MB
+355053d0995e: Loading layer [==================================================>]  3.584kB/3.584kB
+Loaded image: httpd:latest
+
+[root@docker01 docker]# docker images
+REPOSITORY   TAG       IMAGE ID       CREATED      SIZE
+httpd        latest    4b7fc736cb48   3 days ago   145MB
