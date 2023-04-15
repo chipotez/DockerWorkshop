@@ -913,5 +913,20 @@ Status: Downloaded newer image for wordpress:latest
 ```
 ![WordPress](WordPress.png)
 
-
+```
+[root@docker01 docker]# docker exec -it wordpress env|grep -i mysql
+MYSQL_PORT=tcp://172.17.0.2:3306
+MYSQL_PORT_3306_TCP=tcp://172.17.0.2:3306
+MYSQL_PORT_3306_TCP_ADDR=172.17.0.2
+MYSQL_PORT_3306_TCP_PORT=3306
+MYSQL_PORT_3306_TCP_PROTO=tcp
+MYSQL_NAME=/wordpress/mysql
+MYSQL_ENV_MYSQL_DATABASE=wordpress
+MYSQL_ENV_MYSQL_USER=wordpress
+MYSQL_ENV_MYSQL_PASSWORD=password
+MYSQL_ENV_MYSQL_ROOT_PASSWORD=wordpress
+MYSQL_ENV_GOSU_VERSION=1.14
+MYSQL_ENV_LANG=C.UTF-8
+MYSQL_ENV_MARIADB_VERSION=1:10.11.2+maria~ubu2204
+```
 
