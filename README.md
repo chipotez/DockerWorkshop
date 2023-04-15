@@ -855,6 +855,63 @@ CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS        
 | information_schema |
 +--------------------+
 ```
+### docker linking
+
+El comando "docker linking" se refiere a la capacidad de conectar dos contenedores de Docker para que puedan comunicarse entre sí. La conexión se establece mediante la creación de una conexión de red virtual que permite que los contenedores compartan información.
+
+La conexión entre los contenedores se puede establecer mediante el comando "docker run" con la opción "--link". 
+```
+[root@docker01 docker]# docker rm -f $(docker ps -qa)
+4ac1a1f2acc2
+28750bc9cc72
+```
+```
+[root@docker01 docker]# docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+```
+```
+[root@docker01 docker]# docker run -d --name mariadb -e MYSQL_ROOT_PASSWORD=wordpress -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wordpress -e MYSQL_PASSWORD=password mariadb
+c90ea3d5e241818a619176eaf0454f439aa792b9416c074da1529f8c6f179e9a
+```
+```
+[root@docker01 docker]# docker exec -it mariadb mysql -uwordpress -ppassword wordpress -e "show databases;"
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| wordpress          |
++--------------------+
+```
+```
+[root@docker01 docker]# docker run -d --name wordpress --link mariadb:mysql -p 8080:80 wordpress
+Unable to find image 'wordpress:latest' locally
+latest: Pulling from library/wordpress
+26c5c85e47da: Already exists 
+39c8021d1258: Pull complete 
+dff43c2de684: Pull complete 
+383987c505e8: Pull complete 
+3fd742e8a904: Pull complete 
+ccf9807e8362: Pull complete 
+11cc7ce10028: Pull complete 
+2144c81172a9: Pull complete 
+c70fa21d385f: Pull complete 
+7e0980570457: Pull complete 
+6706640f039a: Pull complete 
+244a64c96b8b: Pull complete 
+c43af3ab38bf: Pull complete 
+9e441c3cba9e: Pull complete 
+8c1806133219: Pull complete 
+87b186e37365: Pull complete 
+1252d07e4aa8: Pull complete 
+711d7eb26d29: Pull complete 
+370ec2a7f12b: Pull complete 
+6f05714e9aea: Pull complete 
+eb8ee661b56d: Pull complete 
+Digest: sha256:df3a602190833fd4cd09edaec11c12efad400a046ae5c5721329ec2dacdace0b
+Status: Downloaded newer image for wordpress:latest
+4879183863c7efe2bbb61676f94801efaafb10680b69f61d6162af49bd2fd2e2
+```
+![WordPress](WordPress.png)
 
 
 
