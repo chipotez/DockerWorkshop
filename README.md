@@ -187,13 +187,43 @@ Este comando instala la última versión de Docker CE, así como Docker CLI (la 
 
 Para iniciar el servicio de Docker, ejecuta el siguiente comando:
 
-`sudo systemctl start docker`
+```
+[root@docker01 ~]# systemctl start docker
+
+[root@docker01 ~]# systemctl status docker
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/usr/lib/systemd/system/docker.service; disabled; vendor preset: disabled)
+   Active: active (running) since Sat 2023-04-15 08:50:03 CST; 4min 26s ago
+     Docs: https://docs.docker.com
+ Main PID: 3793 (dockerd)
+    Tasks: 9
+   Memory: 35.8M
+   CGroup: /system.slice/docker.service
+           └─3793 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+Apr 15 08:50:03 docker01.themike.mx dockerd[3793]: time="2023-04-15T08:50:03.336080680-06:00" level=info msg="Firewalld: i>
+Apr 15 08:50:03 docker01.themike.mx dockerd[3793]: time="2023-04-15T08:50:03.462404855-06:00" level=info msg="Loading cont>
+Apr 15 08:50:03 docker01.themike.mx dockerd[3793]: time="2023-04-15T08:50:03.477085545-06:00" level=info msg="Docker daemo>
+Apr 15 08:50:03 docker01.themike.mx dockerd[3793]: time="2023-04-15T08:50:03.477204441-06:00" level=info msg="Daemon has c>
+Apr 15 08:50:03 docker01.themike.mx dockerd[3793]: time="2023-04-15T08:50:03.502947077-06:00" level=info msg="[core] [Serv>
+Apr 15 08:50:03 docker01.themike.mx systemd[1]: Started Docker Application Container Engine.
+Apr 15 08:50:03 docker01.themike.mx dockerd[3793]: time="2023-04-15T08:50:03.507862781-06:00" level=info msg="API listen o>
+Apr 15 08:50:52 docker01.themike.mx dockerd[3793]: time="2023-04-15T08:50:52.979466569-06:00" level=warning msg="Error get>
+Apr 15 08:50:52 docker01.themike.mx dockerd[3793]: time="2023-04-15T08:50:52.979700336-06:00" level=info msg="Attempting n>
+Apr 15 08:50:52 docker01.themike.mx dockerd[3793]: time="2023-04-15T08:50:52.983083281-06:00" level=error msg="Handler for>
+
+
+[root@docker01 ~]# systemctl enable docker.service
+Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /usr/lib/systemd/system/docker.service.
+
+```
 
 5. Verifica la instalación de Docker
 
 Para verificar que Docker se ha instalado correctamente, ejecuta el siguiente comando:
 
 `sudo docker run hello-world`
+
 
 Este comando descarga una imagen de prueba y la ejecuta en un contenedor. Si Docker está instalado correctamente, verás un mensaje de saludo de Docker.
 
