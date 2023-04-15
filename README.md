@@ -668,3 +668,63 @@ fb69b457eb91   httpd     "httpd-foreground"   26 minutes ago   Up 4 minutes   80
 [root@docker01 docker]# curl localhost:8080
 <html><body><h1>It works!</h1></body></html>
 ```
+
+### Ejercicio
+```
+[root@docker01 docker]# docker run -d -p 8083:80 httpd
+5ebb5649340eaaa9cabb26e3c7db89df291b18e416572980466ae3e9f3e71696
+```
+```
+[root@docker01 docker]# docker ps
+CONTAINER ID   IMAGE     COMMAND              CREATED          STATUS          PORTS                                   NAMES
+5ebb5649340e   httpd     "httpd-foreground"   4 seconds ago    Up 3 seconds    0.0.0.0:8083->80/tcp, :::8083->80/tcp   serene_shtern
+```
+```
+[root@docker01 docker]# docker exec -it 5ebb5649340e /bin/bash
+```
+```
+root@5ebb5649340e:/usr/local/apache2# cd htdocs/
+```
+```
+root@5ebb5649340e:/usr/local/apache2/htdocs# cat << EOF > index.html
+> <!DOCTYPE html>
+<html>
+<head>
+        <meta http-equiv="refresh" content="0; url=https://www.citig.mx/">
+</head>
+<body>
+        <p>Redireccionando a https://www.citig.mx/...</p>
+</body>
+</html>
+EOF
+```
+```
+root@5ebb5649340e:/usr/local/apache2/htdocs# cat index.html 
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="refresh" content="0; url=https://www.citig.mx/">
+</head>
+<body>
+	<p>Redireccionando a https://www.citig.mx/...</p>
+</body>
+</html>
+```
+```
+root@5ebb5649340e:/usr/local/apache2/htdocs# exit
+exit
+```
+```
+[root@docker01 docker]# curl localhost:8083
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="refresh" content="0; url=https://www.citig.mx/">
+</head>
+<body>
+	<p>Redireccionando a https://www.citig.mx/...</p>
+</body>
+</html>
+
+
+
