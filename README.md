@@ -725,6 +725,60 @@ exit
 <!-- 	<p>Redireccionando a Coloca la direccion https://www.citig.mx/...</p> -->
 </body>
 </html>
+```
+### docker inspect
+
+El comando docker inspect acepta uno o más nombres o identificadores de objetos de Docker como argumentos. Cuando se ejecuta, devuelve un objeto JSON que contiene información detallada sobre el objeto de Docker especificado. La información incluye detalles como el ID del objeto, la configuración de la red, la configuración del volumen, los metadatos y más.
+
+```
+[root@docker01 docker]# docker ps
+CONTAINER ID   IMAGE     COMMAND              CREATED             STATUS          PORTS                                   NAMES
+5ebb5649340e   httpd     "httpd-foreground"   16 minutes ago      Up 16 minutes   0.0.0.0:8083->80/tcp, :::8083->80/tcp   serene_shtern
+feb841f6a2a6   httpd     "httpd-foreground"   17 minutes ago      Up 17 minutes   0.0.0.0:8082->80/tcp, :::8082->80/tcp   inspiring_wozniak
+c9388a45d655   httpd     "httpd-foreground"   39 minutes ago      Up 18 minutes   0.0.0.0:8081->80/tcp, :::8081->80/tcp   cranky_elion
+eb0b95cda538   httpd     "httpd-foreground"   42 minutes ago      Up 42 minutes   0.0.0.0:8080->80/tcp, :::8080->80/tcp   amazing_rosalind
+fb69b457eb91   httpd     "httpd-foreground"   About an hour ago   Up 46 minutes   80/tcp                                  stupefied_sinoussi
+[root@docker01 docker]# docker inspect 5ebb5649340e
+[
+    {
+        "Id": "5ebb5649340eaaa9cabb26e3c7db89df291b18e416572980466ae3e9f3e71696",
+        "Created": "2023-04-15T17:25:59.168236034Z",
+        "Path": "httpd-foreground",
+        "Args": [],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 5280,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2023-04-15T17:25:59.50260111Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:4b7fc736cb48352ef2c989d63c74bed704fc5a0cd43eb5c7c7cf9ab7faf891d1",
+        "ResolvConfPath": "/var/lib/docker/containers/5ebb5649340eaaa9cabb26e3c7db89df291b18e416572980466ae3e9f3e71696/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/5ebb5649340eaaa9cabb26e3c7db89df291b18e416572980466ae3e9f3e71696/hostname",
+        "HostsPath": "/var/lib/docker/containers/5ebb5649340eaaa9cabb26e3c7db89df291b18e416572980466ae3e9f3e71696/hosts",
+        "LogPath": "/var/lib/docker/containers/5ebb5649340eaaa9cabb26e3c7db89df291b18e416572980466ae3e9f3e71696/5ebb5649340eaaa9cabb26e3c7db89df291b18e416572980466ae3e9f3e71696-json.log",
+        "Name": "/serene_shtern",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+```
 
 
 
