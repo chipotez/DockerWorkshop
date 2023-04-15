@@ -14,6 +14,22 @@ Enfoque de desarrollador de aplicaciones:
 
 Desde la perspectiva de un desarrollador de aplicaciones, Docker es una herramienta para la creación de aplicaciones y servicios. Docker proporciona un ambiente consistente de desarrollo, lo que significa que los desarrolladores pueden trabajar en aplicaciones sin tener que preocuparse por las diferencias en los entornos de desarrollo.
 
+Los beneficios en general de usar docker son:
+
+1. Portabilidad: Docker permite que las aplicaciones se ejecuten de manera consistente en diferentes entornos, lo que facilita el traslado de aplicaciones de un entorno a otro.
+
+2. Aislamiento: Docker utiliza contenedores para proporcionar un ambiente aislado para las aplicaciones, lo que significa que las aplicaciones no se ven afectadas por otros procesos en el sistema.
+
+3. Eficiencia: Docker utiliza recursos compartidos para reducir el uso de recursos y aumentar la eficiencia.
+
+4. Escalabilidad: Docker facilita la escalabilidad horizontal de las aplicaciones, lo que permite agregar o quitar nodos de forma rápida y sencilla.
+
+5. Facilidad de uso: Docker ofrece una interfaz de línea de comandos fácil de usar y una amplia variedad de herramientas y recursos para los desarrolladores.
+
+6. Desarrollo rápido: Docker permite a los desarrolladores crear, probar y desplegar aplicaciones de forma rápida y sencilla.
+
+7. Reproducibilidad: Docker permite que las aplicaciones se puedan reproducir exactamente en diferentes entornos, lo que facilita la detección y corrección de errores.
+
 ## Instalación de Docker en RHEL 8
 
 Docker es una plataforma de software que permite crear, probar y desplegar aplicaciones en contenedores. A continuación, se detallan los pasos para instalar Docker en RHEL 8:
