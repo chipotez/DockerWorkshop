@@ -537,3 +537,73 @@ AH00558: httpd: Could not reliably determine the server's fully qualified domain
 [Sat Apr 15 16:23:03.614760 2023] [core:notice] [pid 1:tid 140485278223680] AH00094: Command line: 'httpd -D FOREGROUND'
 [Sat Apr 15 16:23:11.415243 2023] [mpm_event:notice] [pid 1:tid 140485278223680] AH00491: caught SIGTERM, shutting down
 ```
+```
+[root@docker01 docker]# docker run -d httpd
+fb69b457eb91f6df2d648ac230be0d1b8fa00912189d15cbef0d2f68f006bf7b
+```
+```
+[root@docker01 docker]# docker ps
+CONTAINER ID   IMAGE     COMMAND              CREATED         STATUS         PORTS     NAMES
+fb69b457eb91   httpd     "httpd-foreground"   4 seconds ago   Up 3 seconds   80/tcp    stupefied_sinoussi
+```
+
+### Ejecutando comandos dentro de un contenedor
+
+Ejecutar comandos dentro de un contenedor puede ser necesario por varias razones. Algunas de las razones comunes son las siguientes:
+
+1. Configuración: A menudo, los contenedores Docker se utilizan para alojar aplicaciones o servicios que requieren una configuración especializada. Es posible que sea necesario ejecutar comandos para realizar una configuración específica dentro del contenedor, como configurar las variables de entorno, configurar la red, cambiar los permisos de los archivos, etc.
+
+2. Depuración: Si una aplicación o servicio que se ejecuta en un contenedor Docker no funciona correctamente, se puede utilizar un comando para ejecutar una herramienta de depuración o una shell interactiva dentro del contenedor y analizar los registros y la salida de la aplicación en tiempo real.
+
+3. Mantenimiento: En ocasiones, es posible que se necesite realizar tareas de mantenimiento dentro del contenedor, como la actualización de paquetes o la limpieza de archivos y directorios. Se pueden utilizar comandos para realizar estas tareas dentro del contenedor.
+
+4. Pruebas: Los comandos se pueden utilizar para ejecutar pruebas dentro del contenedor Docker para verificar la funcionalidad de una aplicación o servicio que se ejecuta en el contenedor.
+
+```
+[root@docker01 docker]# docker ps
+CONTAINER ID   IMAGE     COMMAND              CREATED         STATUS         PORTS     NAMES
+fb69b457eb91   httpd     "httpd-foreground"   4 minutes ago   Up 4 minutes   80/tcp    stupefied_sinoussi
+```
+```
+[root@docker01 docker]# docker exec -i fb69b457eb91 ls -l /
+total 4
+drwxr-xr-x.   1 root root    6 Apr 12 01:47 bin
+drwxr-xr-x.   2 root root    6 Dec  9 19:15 boot
+drwxr-xr-x.   5 root root  340 Apr 15 16:33 dev
+drwxr-xr-x.   1 root root   66 Apr 15 16:33 etc
+drwxr-xr-x.   2 root root    6 Dec  9 19:15 home
+drwxr-xr-x.   1 root root   30 Apr 12 01:47 lib
+drwxr-xr-x.   2 root root   34 Apr 11 00:00 lib64
+drwxr-xr-x.   2 root root    6 Apr 11 00:00 media
+drwxr-xr-x.   2 root root    6 Apr 11 00:00 mnt
+drwxr-xr-x.   2 root root    6 Apr 11 00:00 opt
+dr-xr-xr-x. 168 root root    0 Apr 15 16:33 proc
+drwx------.   1 root root   24 Apr 12 01:45 root
+drwxr-xr-x.   3 root root   30 Apr 11 00:00 run
+drwxr-xr-x.   2 root root 4096 Apr 11 00:00 sbin
+drwxr-xr-x.   2 root root    6 Apr 11 00:00 srv
+dr-xr-xr-x.  13 root root    0 Apr 15 15:05 sys
+drwxrwxrwt.   1 root root    6 Apr 12 01:47 tmp
+drwxr-xr-x.   1 root root   19 Apr 11 00:00 usr
+drwxr-xr-x.   1 root root   41 Apr 11 00:00 var
+```
+```
+[root@docker01 docker]# docker exec -it fb69b457eb91 /bin/bash
+
+root@fb69b457eb91:/usr/local/apache2# date
+Sat Apr 15 16:38:39 UTC 2023
+
+root@fb69b457eb91:/usr/local/apache2# whoami 
+root
+
+root@fb69b457eb91:/usr/local/apache2# cat /etc/os-release 
+PRETTY_NAME="Debian GNU/Linux 11 (bullseye)"
+NAME="Debian GNU/Linux"
+VERSION_ID="11"
+VERSION="11 (bullseye)"
+VERSION_CODENAME=bullseye
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+```
