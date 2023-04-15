@@ -715,16 +715,16 @@ root@5ebb5649340e:/usr/local/apache2/htdocs# exit
 exit
 ```
 ```
-[root@docker01 docker]# curl localhost:8083
-<!DOCTYPE html>
-<html>
-<head>
-	<meta http-equiv="refresh" content="0; url=https://www.citig.mx/">
-</head>
-<body>
-	<p>Redireccionando a https://www.citig.mx/...</p>
-</body>
-</html>
+#[root@docker01 docker]# curl localhost:8083
+#<!DOCTYPE html>
+#<html>
+#<head>
+#	<meta http-equiv="refresh" content="0; url=https://www.citig.mx/">
+#</head>
+#<body>
+#	<p>Redireccionando a https://www.citig.mx/...</p>
+#</body>
+#</html>
 
 
 
