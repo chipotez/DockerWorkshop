@@ -813,5 +813,48 @@ fb69b457eb91
 [root@docker01 docker]# docker ps -a
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
+```
+[root@docker01 docker]# docker pull mariadb
+Using default tag: latest
+latest: Pulling from library/mariadb
+74ac377868f8: Pull complete 
+9f8acee20aa1: Pull complete 
+11b336495e01: Pull complete 
+20ab1641dd41: Pull complete 
+eaf0c5c99086: Pull complete 
+239335430207: Pull complete 
+931baaab2c80: Pull complete 
+f2e86cc8f052: Pull complete 
+Digest: sha256:9ff479f244cc596aed9794d035a9f352662f2caed933238c533024df64569853
+Status: Downloaded newer image for mariadb:latest
+docker.io/library/mariadb:latest
+```
+```
+[root@docker01 docker]# docker run mariadb
+2023-04-15 17:56:12+00:00 [Note] [Entrypoint]: Entrypoint script for MariaDB Server 1:10.11.2+maria~ubu2204 started.
+2023-04-15 17:56:12+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+2023-04-15 17:56:12+00:00 [Note] [Entrypoint]: Entrypoint script for MariaDB Server 1:10.11.2+maria~ubu2204 started.
+2023-04-15 17:56:12+00:00 [ERROR] [Entrypoint]: Database is uninitialized and password option is not specified
+	You need to specify one of MARIADB_ROOT_PASSWORD, MARIADB_ROOT_PASSWORD_HASH, MARIADB_ALLOW_EMPTY_ROOT_PASSWORD and MARIADB_RANDOM_ROOT_PASSWORD
+```
+```
+[root@docker01 docker]# docker run -d --name mariadb -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=citig-db -e MYSQL_USER=citig_user -e MYSQL_PASSWORD=password mariadb
+4ac1a1f2acc2b0c386816e51d7ba335dca0e219accf31b184894e24f7655784d
+```
+```
+[root@docker01 docker]# docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS      NAMES
+4ac1a1f2acc2   mariadb   "docker-entrypoint.s…"   7 seconds ago   Up 6 seconds   3306/tcp   mariadb
+```
+```
+[root@docker01 docker]# docker exec -it mariadb mysql -ucitig_user -ppassword citig-db -e "show databases;"
++--------------------+
+| Database           |
++--------------------+
+| citig-db           |
+| information_schema |
++--------------------+
+```
+
 
 
