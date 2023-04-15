@@ -216,25 +216,110 @@ Apr 15 08:50:52 docker01.themike.mx dockerd[3793]: time="2023-04-15T08:50:52.983
 [root@docker01 ~]# systemctl enable docker.service
 Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /usr/lib/systemd/system/docker.service.
 
+[root@docker01 ~]# docker version
+Client: Docker Engine - Community
+ Version:           23.0.3
+ API version:       1.42
+ Go version:        go1.19.7
+ Git commit:        3e7cbfd
+ Built:             Tue Apr  4 22:04:21 2023
+ OS/Arch:           linux/amd64
+ Context:           default
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          23.0.3
+  API version:      1.42 (minimum version 1.12)
+  Go version:       go1.19.7
+  Git commit:       59118bf
+  Built:            Tue Apr  4 22:02:00 2023
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.6.20
+  GitCommit:        2806fc1057397dbaeefbea0e4e17bddfbd388f38
+ runc:
+  Version:          1.1.5
+  GitCommit:        v1.1.5-0-gf19387a
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+  
+  
+  
+  [root@docker01 ~]# docker info
+Client:
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.10.4
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.17.2
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
+
+Server:
+ Containers: 0
+  Running: 0
+  Paused: 0
+  Stopped: 0
+ Images: 0
+ Server Version: 23.0.3
+ Storage Driver: overlay2
+  Backing Filesystem: xfs
+  Supports d_type: true
+  Using metacopy: false
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: cgroupfs
+ Cgroup Version: 1
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
+ Swarm: inactive
+ Runtimes: runc io.containerd.runc.v2
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 2806fc1057397dbaeefbea0e4e17bddfbd388f38
+ runc version: v1.1.5-0-gf19387a
+ init version: de40ad0
+ Security Options:
+  seccomp
+   Profile: builtin
+ Kernel Version: 4.18.0-425.19.2.el8_7.x86_64
+ Operating System: Red Hat Enterprise Linux 8.7 (Ootpa)
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 4
+ Total Memory: 15.46GiB
+ Name: docker01.themike.mx
+ ID: c04c6ffc-6de8-4e2b-8149-b442cb51d08b
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Registry: https://index.docker.io/v1/
+ Experimental: false
+ Insecure Registries:
+  127.0.0.0/8
+ Live Restore Enabled: false
+
+  
+  
 ```
+5. agregue un usuario no root al grupo Docker
+Si no desea utilizar "sudo" para ejecutar un comando Docker en su sistema, debe agregar el usuario no root de su sistema al grupo Docker. 
+De esta forma, puede ejecutar el comando docker como usuario no root o actual. Este es un paso opcional.
 
-5. Verifica la instalación de Docker
-
-Para verificar que Docker se ha instalado correctamente, ejecuta el siguiente comando:
-
-`sudo docker run hello-world`
-
-
-Este comando descarga una imagen de prueba y la ejecuta en un contenedor. Si Docker está instalado correctamente, verás un mensaje de saludo de Docker.
+```
+[root@docker01 ~]# usermod -aG docker $USER
+[root@docker01 ~]# reboot 
+````
 
 ¡Y eso es todo! Ahora tienes Docker instalado en tu sistema RHEL 8.
 
-
-
-
-
-
-Trabajando con imágenes usando la interfaz de línea de comandos (CLI) de Docker
+## Trabajando con imágenes usando la interfaz de línea de comandos (CLI) de Docker
 A continuación, se detallan los pasos para trabajar con imágenes utilizando la interfaz de línea de comandos (CLI) de Docker:
 
 ## Buscando imágenes en Docker Hub
@@ -244,44 +329,57 @@ Visita https://hub.docker.com/ para buscar imágenes disponibles.
 
 Ejecuta el siguiente comando:
 
-`docker search httpd`
-
-Ejemplo de ejecución
 ```
-$ docker search httpd
-
-NAME                     DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
-httpd                    The Apache HTTP Server Project                  4566      [OK]
-httpd-alpine             The Apache HTTP Server Project in alpine       1071      [OK]
-...
+[root@docker01 ~]# docker search httpd | head -n 10
+NAME                                 DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+httpd                                The Apache HTTP Server Project                  4398      [OK]       
+clearlinux/httpd                     httpd HyperText Transfer Protocol (HTTP) ser…   2                    
+paketobuildpacks/httpd                                                               0                    
+vulhub/httpd                                                                         0                    
+jitesoft/httpd                       Apache httpd on Alpine linux.                   0                    
+avenga/httpd-static                                                                  0                    
+betterweb/httpd                                                                      0                    
+centos/httpd-24-centos7              Platform for running Apache httpd 2.4 or bui…   45                   
+manageiq/httpd                       Container with httpd, built on CentOS for Ma…   1                    [OK]
 ```
-
 
 Salida del comando
 
 El comando lista todas las imágenes disponibles en Docker Hub que contienen la palabra clave "httpd". Para cada imagen, muestra su nombre, descripción, número de estrellas y si es oficial o automatizada.
 
 ## Descargando imágenes desde Docker Hub
-Una vez que hayas encontrado la imagen que deseas, descárgala utilizando el siguiente comando:
 
-`docker pull httpd`
+Una vez que hayas encontrado la imagen que deseas, descárgala utilizando el siguiente comando:
+```
+[root@docker01 ~]# docker pull httpd
+Using default tag: latest
+latest: Pulling from library/httpd
+26c5c85e47da: Pull complete 
+2d29d3837df5: Pull complete 
+2483414a5e59: Pull complete 
+e78016c4ba87: Pull complete 
+757908175415: Pull complete 
+Digest: sha256:a182ef2350699f04b8f8e736747104eb273e255e818cd55b6d7aa50a1490ed0c
+Status: Downloaded newer image for httpd:latest
+docker.io/library/httpd:latest
+```
 
 Si necesitas una versión específica de la imagen, agrega el tag correspondiente al final del comando. Por ejemplo:
 
-`docker pull httpd:2.2.29`
-
-Ejemplo de ejecución
-
 ```
-$ docker pull httpd
-
-Using default tag: latest
-latest: Pulling from library/httpd
-b9a857cbf04d: Pull complete
-...
-Digest: sha256:ddcecd29a7a58c38a68d8b3a3a1402eebd9040b39f9d8c0e87e38c68dc1bcb51
-Status: Downloaded newer image for httpd:latest
-docker.io/library/httpd:latest
+root@docker01 ~]# docker pull httpd:2.2.29
+2.2.29: Pulling from library/httpd
+Image docker.io/library/httpd:2.2.29 uses outdated schema1 manifest format. Please upgrade to a schema2 image for better future compatibility. More information at https://docs.docker.com/registry/spec/deprecated-schema-v1/
+4d2e9ae40c41: Pull complete 
+a3ed95caeb02: Pull complete 
+71da54557245: Pull complete 
+721128148697: Pull complete 
+bb02db57acca: Pull complete 
+973e8b763f43: Pull complete 
+9792a80ebd27: Pull complete 
+Digest: sha256:0a39699d267aaee04382c6b1b4fe2fc30737450fe8d4fabd88eee1a3e0016144
+Status: Downloaded newer image for httpd:2.2.29
+docker.io/library/httpd:2.2.29
 ```
 
 Salida del comando
